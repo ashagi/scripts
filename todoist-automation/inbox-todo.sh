@@ -1,12 +1,8 @@
 #!/bin/sh
 
-SCRIPT_PWD="${0%/*}"
+# most likely not crossplatform but I run it in Windows only
+SCRIPT_PWD=$(cygpath -u $(dirname "$0"))
 
-# contains:
-# TODOIST_TOKEN - Todoist API integration token
-# INBOX_FOLDER  - Folder name to scan for new inbox items
-# PROJECT_ID    - Project ID for created tasks
-# LABEL_ID      - Label that will be applied for created tasks
 source "$SCRIPT_PWD/secrets.sh"
 
 # switch internal field separator to newline from whitespace
