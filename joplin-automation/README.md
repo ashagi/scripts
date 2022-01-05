@@ -75,3 +75,23 @@ Follow instruction and setup new remote named `dropbox`
 ```
 export JOPLIN_BACKUP_DIR=dropbox:/Backup/Joplin
 ```
+
+### Schedule backups
+
+Install anacron:
+```
+sudo apt install anacron
+```
+
+Add following to anacron config in `/etc/anacrontab`:
+```
+1       5       backup.joplin     sudo -u ${USERNAME} JOPLIN_BACKUP_DIR=dropbox:/Backup/Joplin bash /home/${USERNAME}/joplin-backup.sh
+```
+Which will run:
+* Every 1 day
+* With 5 min delay from anacron run start
+
+To test the script run following:
+```
+sudo anacron -f -n 
+```
