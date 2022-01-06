@@ -12,3 +12,10 @@ joplin export --format jex /tmp/joplin_${D}.jex
 rclone copyto /tmp/joplin_${D}.jex ${JOPLIN_BACKUP_DIR}/joplin_${D}.jex
 
 rm /tmp/joplin_*.jex
+
+OUTDATED=$(rclone lsf $JOPLIN_BACKUP_DIR | sort -r | tail -n +6)
+
+for B in $OUTDATED
+do
+    rclone deletefile "${JOPLIN_BACKUP_DIR}/${B}"
+done
